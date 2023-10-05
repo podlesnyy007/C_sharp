@@ -2,19 +2,31 @@ using System;
 
 class Program
 {
+    static int Func(int n)
+    {
+        int del = 0;
+        for(uint i = 1; i <= Math.Sqrt(n); i++)
+        {
+            if(n % i == 0) //если i делитель n
+            {
+                if (i * i == n) //и i нет парного делителя
+                    del++;
+                else
+                    del += 2; // иначе выводим i и его парный делитель
+            }
+        }
+        return del;
+    }
     static void Main()
     {
         Console.Write("a = ");
         int a = int.Parse(Console.ReadLine());
         Console.Write("b = ");
         int b = int.Parse(Console.ReadLine());
-        int delA = 0, delB = 0;
-        for (int i = 1; i <= a; i++)
-            if(a % i == 0)
-                delA++;
-        for (int i = 1; i <= b; i++)
-            if (b % i == 0)
-                delB++;
+        int delA = Func(a);
+        int delB = Func(b);
+        Console.WriteLine("Число делителей у числа " + a + ": " + delA);
+        Console.WriteLine("Число делителей у числа " + b + ": " + delB);
         if (delA > delB)
             Console.WriteLine("У числа " + a + " больше делителей");
         else
@@ -26,3 +38,11 @@ class Program
         }
     }
 }
+
+/*
+a = 88
+b = 84
+Число делителей у числа 88: 8
+Число делителей у числа 84: 12
+У числа 84 больше делителей
+*/
