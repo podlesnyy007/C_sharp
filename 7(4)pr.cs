@@ -13,6 +13,7 @@ class Program
             mas_1[i] = new int[n];
             for (int j = 0; j < mas_1[i].Length; j++)
             {
+                Console.Write("a[{0},{1}]= ", i, j);
                 mas_1[i][j] = int.Parse(Console.ReadLine());
             }
         }
