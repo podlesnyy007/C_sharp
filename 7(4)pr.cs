@@ -7,23 +7,22 @@ class Program
         Console.Write("n = ");
         int n = int.Parse(Console.ReadLine());
         Console.WriteLine("Первый массив:");
-        int[][] mas_1 = new int[n][];
-        for (int i = 0; i < mas_1.Length; i++)
+        int[,] mas_1 = new int[n, n];
+        for (int i = 0; i < n; i++)
         {
-            mas_1[i] = new int[n];
-            for (int j = 0; j < mas_1[i].Length; j++)
+            for (int j = 0; j < n; j++)
             {
                 Console.Write("a[{0},{1}]= ", i, j);
-                mas_1[i][j] = int.Parse(Console.ReadLine());
+                mas_1[i, j] = int.Parse(Console.ReadLine());
             }
         }
         int[] mas_2 = new int[n];
-        for (int i = 0; i < mas_1.Length; i++)
+        for (int i = 0; i < n; i++)
         {
             mas_2[i] = 1;
-            for (int j = 0; j < mas_1[i].Length; j++)
+            for (int j = 0; j < n; j++)
             {
-                mas_2[i] *= mas_1[j][i];
+                mas_2[i] *= mas_1[j, i];
             }
         }
         Console.WriteLine("Второй массив:");
@@ -46,15 +45,15 @@ class Program
 /*
 n = 3
 Первый массив:
-1
-2
-3
-4
-5
-6
-7
-8
-9
+a[0,0]= 1
+a[0,1]= 2
+a[0,2]= 3
+a[1,0]= 4
+a[1,1]= 5
+a[1,2]= 6
+a[2,0]= 7
+a[2,1]= 8
+a[2,2]= 9
 Второй массив:
 28 80 162
 Минимальный элеменет во втором массиве: 28
