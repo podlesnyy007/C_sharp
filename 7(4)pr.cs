@@ -17,7 +17,7 @@ class Program
             }
         }
         int[] mas_2 = new int[n];
-        for (int i = 0; i < mas_2.Length; i++)
+        for (int i = 0; i < mas_1.Length; i++)
         {
             mas_2[i] = 1;
             for (int j = 0; j < mas_1[i].Length; j++)
