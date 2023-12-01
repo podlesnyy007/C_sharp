@@ -13,9 +13,11 @@ class Program
         using (FileStream fileIn2 = new FileStream(inputFile2, FileMode.Open))
         using (StreamWriter fileOut = new StreamWriter(outputFile))
         {
+            // Создаем объекты для чтения и записи текстовых данных
             StreamReader reader1 = new StreamReader(fileIn1);
             StreamReader reader2 = new StreamReader(fileIn2);
 
+            // Читаем строки из обоих входных файлов и разделяем их на числа
             while (!reader1.EndOfStream && !reader2.EndOfStream)
             {
                 string line1 = reader1.ReadLine();
