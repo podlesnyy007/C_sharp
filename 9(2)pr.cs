@@ -5,42 +5,33 @@ class Program
 {
     static void Main()
     {
-        string inputFile1 = "file1.txt";
-        string inputFile2 = "file2.txt";
-        string outputFile = "output.txt";
-
-        using (FileStream fileIn1 = new FileStream(inputFile1, FileMode.Open))
-        using (FileStream fileIn2 = new FileStream(inputFile2, FileMode.Open))
-        using (StreamWriter fileOut = new StreamWriter(outputFile))
+        using (StreamReader fileIn1 = new StreamReader ("d:/Files9.3/text1.txt"))
         {
-            // Создаем объекты для чтения и записи текстовых данных
-            StreamReader reader1 = new StreamReader(fileIn1);
-            StreamReader reader2 = new StreamReader(fileIn2);
-
-            // Читаем строки из обоих входных файлов и разделяем их на числа
-            while (!reader1.EndOfStream && !reader2.EndOfStream)
+            using (StreamReader fileIn2 = new StreamReader ("d:/Files9.3/text2.txt"))
             {
-                string line1 = reader1.ReadLine();
-                string line2 = reader2.ReadLine();
-
-                string[] numbers1 = line1.Split(' ');
-                string[] numbers2 = line2.Split(' ');
-
-                for (int i = 0; i < numbers1.Length; i++)
+                using (StreamWriter fileOut = new StreamWriter ("d:/Files9.3/text3.txt"))
                 {
-                    int num1 = int.Parse(numbers1[i]);
-                    int num2 = int.Parse(numbers2[i]);
-
-                    if (num1 % num2 == 0)
+                    string line1, line2;
+                    while ((line1 = fileIn1.ReadLine()) != null && (line2 = fileIn2.ReadLine()) != null)
                     {
-                        fileOut.Write(num1 / num2 + " ");
-                    }
-                    if (num2 % num1 == 0)
-                    {
-                        fileOut.Write(num2 / num1 + " ");
+                        string[] numbers1 = line1.Split (" ");
+                        string[] numbers2 = line2.Split (" ");
+                        for (int i = 0;  i < numbers1.Length; i++)
+                        {
+                            int num1 = int.Parse(numbers1[i]);
+                            int num2 = int.Parse(numbers2[i]);
+                            if (num1 % num2 == 0)
+                            {
+                                fileOut.Write(num1 / num2 + " ");
+                            }
+                            else if (num2 % num1 == 0)
+                            {
+                                fileOut.Write(num2 / num1 + " ");
+                            }
+                        }
+                        fileOut.WriteLine();
                     }
                 }
-                fileOut.WriteLine(); // Добавление перехода на новую строку между записями
             }
         }
     }
