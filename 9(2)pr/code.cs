@@ -14,13 +14,16 @@ class Program
 {
     static void Main()
     {
+        //Класс StreamReader предназначен для организации входного символьного потока. 
         using (StreamReader fileIn1 = new StreamReader ("d:/Files9.3/text1.txt"))
         {
             using (StreamReader fileIn2 = new StreamReader ("d:/Files9.3/text2.txt"))
             {
+                //Класс StreamWriter предназначен для организации выходного символьного потока.
                 using (StreamWriter fileOut = new StreamWriter ("d:/Files9.3/text3.txt"))
                 {
                     string line1, line2;
+                    //читаем построчно до тех пор, пока поток fileIn не пуст
                     while ((line1 = fileIn1.ReadLine()) != null && (line2 = fileIn2.ReadLine()) != null)
                     {
                         string[] numbers1 = line1.Split (" ");
@@ -31,21 +34,20 @@ class Program
                             int num2 = int.Parse(numbers2[i]);
                             if (num1 % num2 == 0)
                             {
-                                fileOut.Write(num1 / num2 + " ");
+                                fileOut.Write(num1 / num2 + " "); //записываем данные в выходной поток
                             }
                             else if (num2 % num1 == 0)
                             {
                                 fileOut.Write(num2 / num1 + " ");
                             }
                         }
-                        fileOut.WriteLine();
+                        fileOut.WriteLine(); //Добавление перехода на новую строку между записями
                     }
                 }
             }
         }
     }
 }
-
 /*
 2 10 7 11 20 10
 2 10 7 11 20 10
