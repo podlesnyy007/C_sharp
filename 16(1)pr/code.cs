@@ -27,7 +27,7 @@ class Program
             }
         }
         fileIn.Close();
-        var numbers = list.Where(n => n >= -999 && n <= -100).Select(x => -x).OrderByDescending(n => n);
+        var numbers = list.Where(n => n >= -999 && n <= -100).OrderByDescending(n => n).Select(x => -x);
         StreamWriter fileOut = new StreamWriter("d:/MetodRasshireniya1/output.txt");
         foreach (int x in numbers)
         {
@@ -41,9 +41,9 @@ class Program
 -123 45 -678 987 -456
 -50 999 -222 -101 0
 
-678
-456
-222
-123
 101
+123
+222
+456
+678
 */
