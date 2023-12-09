@@ -7,6 +7,7 @@
 
 using System;
 using System.IO;
+using System.Collections.Generic;
 
 struct SPoint
 {
@@ -17,74 +18,90 @@ struct SPoint
         this.y = y;
         this.z = z;
     }
-}
-
-class Program
-{
-    static double Distance(SPoint point1, SPoint point2)
+    public static double Distance(SPoint point1, SPoint point2)
     {
         double dx = point1.x - point2.x;
         double dy = point1.y - point2.y;
         double dz = point1.z - point2.z;
         return Math.Sqrt(dx * dx + dy * dy + dz * dz);
     }
+}
 
+class Program
+{
     static void Main()
     {
         using (StreamReader fileIn = new StreamReader("d:/Struct1/input.txt"))
         {
             int n = int.Parse(fileIn.ReadLine());
             SPoint[] mas = new SPoint[n];
+            List<Tuple<double, SPoint, SPoint, SPoint>> maxPerPoint = new List<Tuple<double, SPoint, SPoint, SPoint>>();
             for (int i = 0; i < n; i++)
             {
                 string[] str = fileIn.ReadLine().Split(' ');
-                mas[i] = new SPoint(int.Parse(str[0]), int.Parse(str[1]), int.Parse(str[2])); //вызов конструктора структуры
+                mas[i] = new SPoint(int.Parse(str[0]), int.Parse(str[1]), int.Parse(str[2]));
             }
             double maxPerimeter = 0;
-            SPoint point1 = new SPoint();
-            SPoint point2 = new SPoint();
-            SPoint point3 = new SPoint();
             for (int i = 0; i < n - 2; i++)
             {
                 for (int j = i + 1; j < n - 1; j++)
                 {
                     for (int k = j + 1; k < n; k++)
                     {
-                        double side1 = Distance(mas[i], mas[j]);
-                        double side2 = Distance(mas[j], mas[k]);
-                        double side3 = Distance(mas[k], mas[i]);
-                        double perimeter = side1 + side2 + side3;
-                        if (perimeter > maxPerimeter)
+                        double side1 = SPoint.Distance(mas[i], mas[j]);
+                        double side2 = SPoint.Distance(mas[j], mas[k]);
+                        double side3 = SPoint.Distance(mas[k], mas[i]);
+                        if (side2 + side3 > side1 && side1 + side3 > side2 && side1 + side2 > side3)
                         {
-                            maxPerimeter = perimeter;
-                            point1 = mas[i];
-                            point2 = mas[j];
-                            point3 = mas[k];
+                            double perimeter = side1 + side2 + side3;
+                            if (perimeter >= maxPerimeter)
+                            {
+                                if (perimeter > maxPerimeter)
+                                {
+                                    maxPerPoint.Clear();
+                                    maxPerimeter = perimeter;
+                                }
+                                maxPerPoint.Add(new Tuple<double, SPoint, SPoint, SPoint>(perimeter, mas[i], mas[j], mas[k]));
+                            }
                         }
                     }
                 }
             }
-            Console.WriteLine("Точки, образующие треугольник наибольшего периметра:");
-            Console.WriteLine("Точка 1: ({0}, {1}, {2})", point1.x, point1.y, point1.z);
-            Console.WriteLine("Точка 2: ({0}, {1}, {2})", point2.x, point2.y, point2.z);
-            Console.WriteLine("Точка 3: ({0}, {1}, {2})", point3.x, point3.y, point3.z);
-            Console.WriteLine("Наибольший периметр: {0}", maxPerimeter);
+            Console.WriteLine("Наибольший периметр: {0}", maxPerPoint[0].Item1);
+            foreach (var triangle in maxPerPoint)
+            {
+                Console.WriteLine("Точки треугольника с маскимальным периметром:");
+                Console.WriteLine("Точка 1: ({0}, {1}, {2})", triangle.Item2.x, triangle.Item2.y, triangle.Item2.z);
+                Console.WriteLine("Точка 2: ({0}, {1}, {2})", triangle.Item3.x, triangle.Item3.y, triangle.Item3.z);
+                Console.WriteLine("Точка 3: ({0}, {1}, {2})", triangle.Item4.x, triangle.Item4.y, triangle.Item4.z);
+            }
         }
     }
 }
 
 /*
-6
-1 0 0
-0 1 0
-0 0 1
-3 0 0
-0 3 0
-0 0 3
+5
+0 0 0
+4 0 0
+4 4 0
+0 4 0
+2 2 0
 
-Точки, образующие треугольник наибольшего периметра:
-Точка 1: (3, 0, 0)
-Точка 2: (0, 3, 0)
-Точка 3: (0, 0, 3)
-Наибольший периметр: 12,727922061357855
+Наибольший периметр: 13,65685424949238
+Точки треугольника с маскимальным периметром:
+Точка 1: (0, 0, 0)
+Точка 2: (4, 0, 0)
+Точка 3: (4, 4, 0)
+Точки треугольника с маскимальным периметром:
+Точка 1: (0, 0, 0)
+Точка 2: (4, 0, 0)
+Точка 3: (0, 4, 0)
+Точки треугольника с маскимальным периметром:
+Точка 1: (0, 0, 0)
+Точка 2: (4, 4, 0)
+Точка 3: (0, 4, 0)
+Точки треугольника с маскимальным периметром:
+Точка 1: (4, 0, 0)
+Точка 2: (4, 4, 0)
+Точка 3: (0, 4, 0)
 */
