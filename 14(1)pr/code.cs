@@ -35,7 +35,7 @@ class Program
         {
             int n = int.Parse(fileIn.ReadLine());
             SPoint[] mas = new SPoint[n];
-            List<Tuple<double, SPoint, SPoint, SPoint>> maxPerPoint = new List<Tuple<double, SPoint, SPoint, SPoint>>();
+            List<Tuple<SPoint, SPoint, SPoint>> maxPerPoint = new List<Tuple<SPoint, SPoint, SPoint>>();
             for (int i = 0; i < n; i++)
             {
                 string[] str = fileIn.ReadLine().Split(' ');
@@ -61,19 +61,19 @@ class Program
                                     maxPerPoint.Clear();
                                     maxPerimeter = perimeter;
                                 }
-                                maxPerPoint.Add(new Tuple<double, SPoint, SPoint, SPoint>(perimeter, mas[i], mas[j], mas[k]));
+                                maxPerPoint.Add(new Tuple<SPoint, SPoint, SPoint>(mas[i], mas[j], mas[k]));
                             }
                         }
                     }
                 }
             }
-            Console.WriteLine("Наибольший периметр: {0}", maxPerPoint[0].Item1);
+            Console.WriteLine("Наибольший периметр: {0}", maxPerimeter);
             foreach (var triangle in maxPerPoint)
             {
                 Console.WriteLine("Точки треугольника с маскимальным периметром:");
-                Console.WriteLine("Точка 1: ({0}, {1}, {2})", triangle.Item2.x, triangle.Item2.y, triangle.Item2.z);
-                Console.WriteLine("Точка 2: ({0}, {1}, {2})", triangle.Item3.x, triangle.Item3.y, triangle.Item3.z);
-                Console.WriteLine("Точка 3: ({0}, {1}, {2})", triangle.Item4.x, triangle.Item4.y, triangle.Item4.z);
+                Console.WriteLine("Точка 1: ({0}, {1}, {2})", triangle.Item1.x, triangle.Item1.y, triangle.Item1.z);
+                Console.WriteLine("Точка 2: ({0}, {1}, {2})", triangle.Item2.x, triangle.Item2.y, triangle.Item2.z);
+                Console.WriteLine("Точка 3: ({0}, {1}, {2})", triangle.Item3.x, triangle.Item3.y, triangle.Item3.z);
             }
         }
     }
