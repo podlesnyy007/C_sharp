@@ -38,11 +38,11 @@ struct Bank : IComparable<Bank>
 
     public int CompareTo(Bank other)
     {
-        if (this.amount == other.amount) 
-            return 0;  
-        else if (this.amount > other.amount) 
+        if (this.amount == other.amount)
+            return 0;
+        else if (this.amount > other.amount)
             return 1;
-        else 
+        else
             return -1;
     }
 }
@@ -57,16 +57,14 @@ class Program
         while (!fileIn.EndOfStream)
         {
             string[] data = fileIn.ReadLine().Split(' ');
-            Bank account = new Bank
-            {
-                surname = data[0],
-                name = data[1],
-                patronymicn = data[2],
-                accountNumber = int.Parse(data[3]),
-                amount = double.Parse(data[4]),
-                yearOpened = int.Parse(data[5])
-            };
-            accounts.Add(account);
+            string temp_surname = data[0];
+            string temp_name = data[1];
+            string temp_patronymicn = data[2];
+            int temp_accountNumber = int.Parse(data[3]);
+            double temp_amount = double.Parse(data[4]);
+            int temp_yearOpened = int.Parse(data[5]);
+            Bank temp = new Bank(temp_surname, temp_name, temp_patronymicn, temp_accountNumber, temp_amount, temp_yearOpened);
+            accounts.Add(temp);
         }
         fileIn.Close();
 
