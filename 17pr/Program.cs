@@ -30,63 +30,64 @@ namespace ZadachiC_
     {
         static void Main()
         {
+            StreamReader fileIn = new StreamReader("c:/Class/input.txt");
+            List<int> sides = new List<int>();
+            while (!fileIn.EndOfStream)
             {
-                StreamReader fileIn = new StreamReader("d:/Class/input.txt");
-                List<int> sides = new List<int>();
-                while (!fileIn.EndOfStream)
+                string[] line = fileIn.ReadLine().Split(" ");
+                foreach (string side in line)
                 {
-                    string[] line = fileIn.ReadLine().Split(" ");
-                    foreach (string side in line)
-                    {
-                        sides.Add(int.Parse(side));
-                    }
+                    sides.Add(int.Parse(side));
                 }
-
-                Triangle triangle = new Triangle(sides[0], sides[1], sides[2]);
-
-                // Вывод сторон треугольника на экран
-                triangle.PrintSides();
-
-                // Вывод сторон треугольника через идексатор
-                Console.WriteLine("Значение по индексу 0: {0} \nЗначение по индексу 1: {1} \nЗначение по индексу 2: {2}",
-                        triangle[0], triangle[1], triangle[2]);
-
-                // Проверка существования треугольника
-                if (triangle)
-                {
-                    Console.WriteLine("Треугольник существует");
-                }
-                else
-                {
-                    Console.WriteLine("Треугольник не существует");
-                }
-
-                // Вывод периметра треугольника
-                int perimeter = triangle.Perimeter();
-                Console.WriteLine("Периметр: {0}", perimeter);
-
-                // Вывод площади треугольника
-                double area = triangle.Area();
-                Console.WriteLine("Площадь: {0}", area);
-
-                // Использование операции ++
-                triangle++;
-                triangle.PrintSides();
-
-                // Использование операции --
-                triangle.A = sides[0];
-                triangle.B = sides[1];
-                triangle.C = sides[2];
-                triangle--;
-                triangle.PrintSides();
-
-                // Использование операции *
-                triangle.A = sides[0];
-                triangle.B = sides[1];
-                triangle.C = sides[2];
-                triangle *= 2;
-                triangle.PrintSides();
             }
+
+            Triangle triangle = new Triangle(sides[0], sides[1], sides[2]);
+
+            // Вывод сторон треугольника на экран
+            triangle.PrintSides();
+
+            // Вывод сторон треугольника через идексатор
+            Console.WriteLine("Значение по индексу 0: {0} \nЗначение по индексу 1: {1} \nЗначение по индексу 2: {2}",
+                    triangle[0], triangle[1], triangle[2]);
+
+            // Проверка существования треугольника
+            if (triangle)
+            {
+                Console.WriteLine("Треугольник существует");
+            }
+            else
+            {
+                Console.WriteLine("Треугольник не существует");
+            }
+
+            // Вывод периметра треугольника
+            int perimeter = triangle.Perimeter();
+            Console.WriteLine("Периметр: {0}", perimeter);
+
+            // Вывод площади треугольника
+            double area = triangle.Area();
+            Console.WriteLine("Площадь: {0}", area);
+
+            // Использование операции ++
+            triangle++;
+            triangle.PrintSides();
+            Console.WriteLine();
+
+            // Использование операции --
+            triangle.A = sides[0];
+            triangle.B = sides[1];
+            triangle.C = sides[2];
+            Triangle z = triangle--;
+            triangle.PrintSides();
+            z.PrintSides();
+            Console.WriteLine();
+
+            // Использование операции *
+            Triangle v = triangle * 2;
+            triangle.PrintSides();
+            v.PrintSides();
+
+            fileIn.Close();
         }
     }
 }
