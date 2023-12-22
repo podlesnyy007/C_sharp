@@ -1,0 +1,48 @@
+using System;
+using System.IO;
+namespace Dop_pr
+{
+    class Program
+    {
+        //Метод возвращает true если подстрока палиндром, иначе возвращает false
+        static bool IsPalindrom(string s, int left, int right)
+        {
+            while (left <= right)
+            {
+                if (s[left] != s[right])
+                {
+                    return false;
+                }
+                ++left;
+                --right;
+            }
+            return true;
+        }
+        static void Main()
+        {
+            StreamReader fileIn = new StreamReader("c:/Dop_pr/input.txt");
+            string palindrom = "";
+            while (!fileIn.EndOfStream)
+            {
+                string data = fileIn.ReadLine();
+                palindrom += data;
+            }
+            Console.WriteLine("Палиндромы: ");
+            //генерируем все возможные подстроки
+            DateTime startTime = DateTime.Now;
+            for (int left = 0; left < palindrom.Length; ++left)
+            {
+                for (int right = left + 1; right < palindrom.Length; ++right)
+                {
+                    if (IsPalindrom(palindrom, left, right))
+                    {
+                        Console.WriteLine(palindrom.Substring(left, right - left + 1));
+                    }
+                }
+            }
+            DateTime endTime = DateTime.Now;
+            TimeSpan duration = endTime - startTime;
+            Console.WriteLine($"Прямой поиск палиндромов занял {duration.TotalMilliseconds} миллисекунд");
+        }
+    }
+}
