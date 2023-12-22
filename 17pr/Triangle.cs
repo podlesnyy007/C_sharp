@@ -95,19 +95,22 @@ namespace ZadachiC_
         // Перегрузка операции ++ (--): одновременно увеличивает (уменьшает) значение полей a, b и c на 1 
         public static Triangle operator ++(Triangle triangle)
         {
-            triangle.a++;
-            triangle.b++;
-            triangle.c++;
-            return triangle;
+            Triangle temp = new Triangle(triangle.A, triangle.B, triangle.C);
+            temp.a++;
+            temp.b++;
+            temp.c++;
+            return temp;
         }
 
         public static Triangle operator --(Triangle triangle)
         {
             if (triangle.a > 0 && triangle.b > 0 && triangle.c > 0)
             {
-                triangle.a--;
-                triangle.b--;
-                triangle.c--;
+                Triangle temp = new Triangle(triangle.A, triangle.B, triangle.C);
+                temp.a--;
+                temp.b--;
+                temp.c--;
+                return temp;
             }
             return triangle;
         }
@@ -127,18 +130,16 @@ namespace ZadachiC_
         // Перегрузка операции *: одновременно домножает поля a, b и c на скаляр. 
         public static Triangle operator *(Triangle triangle, int scalar)
         {
-            triangle.a *= scalar;
-            triangle.b *= scalar;
-            triangle.c *= scalar;
-            return triangle;
+            Triangle temp = new Triangle(triangle.A, triangle.B, triangle.C);
+            temp.a *= scalar;
+            temp.b *= scalar;
+            temp.c *= scalar;
+            return temp;
         }
 
         public static Triangle operator *(int scalar, Triangle triangle)
         {
-            triangle.a *= scalar;
-            triangle.b *= scalar;
-            triangle.c *= scalar;
-            return triangle;
+            return triangle * scalar;
         }
     }
 }
