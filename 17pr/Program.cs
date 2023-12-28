@@ -30,7 +30,7 @@ namespace ZadachiC_
     {
         static void Main()
         {
-            StreamReader fileIn = new StreamReader("c:/Class/input.txt");
+            StreamReader fileIn = new StreamReader("d:/Class/input.txt");
             List<int> sides = new List<int>();
             while (!fileIn.EndOfStream)
             {
@@ -93,8 +93,9 @@ namespace ZadachiC_
 }
 
 /*
-3 4 5
-
+Сторона A: 3, Сторона B: 4, Сторона C: 5
+Значение по индексу 0: 3
+Значение по индексу 1: 4
 Значение по индексу 2: 5
 Треугольник существует
 Периметр: 12
