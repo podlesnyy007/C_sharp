@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using static System.Net.WebRequestMethods;
 
-namespace ConsoleApp2
+namespace ZadachiC_
 {
     class Program
     {
@@ -48,7 +47,7 @@ namespace ConsoleApp2
 
             try
             {
-                string fileInput = "c:/Dop_pr/input.txt";
+                string fileInput = "d:/Dop_pr/input.txt";
                 using (StreamReader fileIn = new StreamReader(fileInput))
                 {
                     string line;
@@ -65,19 +64,14 @@ namespace ConsoleApp2
                     //вычисляем массив степеней
                     long[] pwp = new long[n];
                     pwp[0] = 1;
-
-                    
                     for (int i = 1; i < n; i++)
                     {
                         pwp[i] = pwp[i - 1] * P;
                     }
-                    
 
                     //вычисляем массив хэш-значений для всех префиксов строки S и перевернутой строки
                     long[] h = new long[n];
                     long[] h_r = new long[n];
-
-                    
                     for (int i = 0; i < n; i++)
                     {
                         h[i] = (words[t][i] - 'а' + 1) * pwp[i];
@@ -89,11 +83,9 @@ namespace ConsoleApp2
                             h_r[n - 1 - i] += h_r[n - i];
                         }
                     }
-                    
 
                     //поиск палиндромов нечетной длины
                     int[] oddCount = new int[n];
-
                     stopwatch.Start();
                     for (int i = 0; i < n; i++)
                     {
@@ -116,8 +108,6 @@ namespace ConsoleApp2
 
                     //поиск палиндромов четной длины
                     int[] evenCount = new int[n];
-
-
                     stopwatch.Start();
                     for (int i = 0; i < n; i++)
                     {
@@ -162,4 +152,4 @@ namespace ConsoleApp2
     }
 }
 
-//Время выполнения алгоритма: 0,8948 мс
+//Время выполнения алгоритма: 0,4235 мс
