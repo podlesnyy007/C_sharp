@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 
-namespace ConsoleApp1
+namespace ZadachiC_
 {
     class Program
     {
@@ -30,7 +30,7 @@ namespace ConsoleApp1
             List<string> palindromes = new List<string>();
 
             // Чтение входных данных из файла
-            string fileInput = "c:/Dop_pr/input.txt";
+            string fileInput = "d:/Dop_pr/input.txt";
             try
             {
                 using (StreamReader fileIn = new StreamReader(fileInput))
@@ -77,4 +77,7 @@ namespace ConsoleApp1
     }
 }
 
-//Время выполнения алгоритма: 0,85 мс
+//Время выполнения алгоритма: 0,3215 мс
+/*
+Первый алгоритм быстрее, но не на много. С увеличением входных данных (количество символов в тексте), второй алгоритм будет работать быстрее.
+*/
